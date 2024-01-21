@@ -1,4 +1,4 @@
-version: '4'
+version: '3.9'
 services:
   www:
     image: php:apache
@@ -7,4 +7,18 @@ services:
     ports: 
       - 80:80
       - 443:443
-      
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=php_docker
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+
